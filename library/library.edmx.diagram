@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="48f1cf89ef2343af8c57d8c414dc8668" Name="Diagram1">
+        <EntityTypeShape EntityType="ip223Model.book_author" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="ip223Model.books" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ip223Model.extradition" Width="1.5" PointX="8.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ip223Model.publishing_house" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ip223Model.readers" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ip223Model.sections" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ip223Model.The_authors" Width="1.5" PointX="4" PointY="7.125" IsExpanded="true" />
+        <AssociationConnector Association="ip223Model.FK_book_author_books" ManuallyRouted="false" />
+        <AssociationConnector Association="ip223Model.FK_book_author_The_authors" ManuallyRouted="false" />
+        <AssociationConnector Association="ip223Model.FK_books_publishing_house" ManuallyRouted="false" />
+        <AssociationConnector Association="ip223Model.FK_books_sections" ManuallyRouted="false" />
+        <AssociationConnector Association="ip223Model.FK_extradition_books" ManuallyRouted="false" />
+        <AssociationConnector Association="ip223Model.FK_extradition_readers" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

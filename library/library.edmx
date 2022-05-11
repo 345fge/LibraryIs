@@ -1,0 +1,463 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище ip223Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="book author">
+          <Key>
+            <PropertyRef Name="id book author" />
+          </Key>
+          <Property Name="id book author" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id author" Type="int" Nullable="false" />
+          <Property Name="id book" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="books">
+          <Key>
+            <PropertyRef Name="id book" />
+          </Key>
+          <Property Name="id book" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="publishing house" Type="int" Nullable="false" />
+          <Property Name="the year of publishing" Type="date" Nullable="false" />
+          <Property Name="storage" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="section" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="extradition">
+          <Key>
+            <PropertyRef Name="issue  namber" />
+          </Key>
+          <Property Name="issue  namber" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date of issue" Type="int" Nullable="false" />
+          <Property Name="return date" Type="date" Nullable="false" />
+          <Property Name="change" Type="date" Nullable="false" />
+          <Property Name="term" Type="date" Nullable="false" />
+          <Property Name="library card number" Type="int" Nullable="false" />
+          <Property Name="id book" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="publishing house">
+          <Key>
+            <PropertyRef Name="publishing house" />
+          </Key>
+          <Property Name="publishing house" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="city" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="readers">
+          <Key>
+            <PropertyRef Name="library card number" />
+          </Key>
+          <Property Name="library card number" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="patronymic" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="the address" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="telephone" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sections">
+          <Key>
+            <PropertyRef Name="section" />
+          </Key>
+          <Property Name="section" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="The authors">
+          <Key>
+            <PropertyRef Name="id author" />
+          </Key>
+          <Property Name="id author" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="note" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_book author_books">
+          <End Role="books" Type="Self.books" Multiplicity="1" />
+          <End Role="book author" Type="Self.book author" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="books">
+              <PropertyRef Name="id book" />
+            </Principal>
+            <Dependent Role="book author">
+              <PropertyRef Name="id book" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_book author_The authors">
+          <End Role="The authors" Type="Self.The authors" Multiplicity="1" />
+          <End Role="book author" Type="Self.book author" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="The authors">
+              <PropertyRef Name="id author" />
+            </Principal>
+            <Dependent Role="book author">
+              <PropertyRef Name="id author" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_books_publishing house">
+          <End Role="publishing house" Type="Self.publishing house" Multiplicity="1" />
+          <End Role="books" Type="Self.books" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="publishing house">
+              <PropertyRef Name="publishing house" />
+            </Principal>
+            <Dependent Role="books">
+              <PropertyRef Name="publishing house" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_books_sections">
+          <End Role="sections" Type="Self.sections" Multiplicity="1" />
+          <End Role="books" Type="Self.books" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sections">
+              <PropertyRef Name="section" />
+            </Principal>
+            <Dependent Role="books">
+              <PropertyRef Name="section" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_extradition_books">
+          <End Role="books" Type="Self.books" Multiplicity="1" />
+          <End Role="extradition" Type="Self.extradition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="books">
+              <PropertyRef Name="id book" />
+            </Principal>
+            <Dependent Role="extradition">
+              <PropertyRef Name="id book" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_extradition_readers">
+          <End Role="readers" Type="Self.readers" Multiplicity="1" />
+          <End Role="extradition" Type="Self.extradition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="readers">
+              <PropertyRef Name="library card number" />
+            </Principal>
+            <Dependent Role="extradition">
+              <PropertyRef Name="library card number" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ip223ModelContainer">
+          <EntitySet Name="book author" EntityType="Self.book author" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="books" EntityType="Self.books" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="extradition" EntityType="Self.extradition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="publishing house" EntityType="Self.publishing house" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="readers" EntityType="Self.readers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sections" EntityType="Self.sections" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="The authors" EntityType="Self.The authors" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_book author_books" Association="Self.FK_book author_books">
+            <End Role="books" EntitySet="books" />
+            <End Role="book author" EntitySet="book author" />
+          </AssociationSet>
+          <AssociationSet Name="FK_book author_The authors" Association="Self.FK_book author_The authors">
+            <End Role="The authors" EntitySet="The authors" />
+            <End Role="book author" EntitySet="book author" />
+          </AssociationSet>
+          <AssociationSet Name="FK_books_publishing house" Association="Self.FK_books_publishing house">
+            <End Role="publishing house" EntitySet="publishing house" />
+            <End Role="books" EntitySet="books" />
+          </AssociationSet>
+          <AssociationSet Name="FK_books_sections" Association="Self.FK_books_sections">
+            <End Role="sections" EntitySet="sections" />
+            <End Role="books" EntitySet="books" />
+          </AssociationSet>
+          <AssociationSet Name="FK_extradition_books" Association="Self.FK_extradition_books">
+            <End Role="books" EntitySet="books" />
+            <End Role="extradition" EntitySet="extradition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_extradition_readers" Association="Self.FK_extradition_readers">
+            <End Role="readers" EntitySet="readers" />
+            <End Role="extradition" EntitySet="extradition" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ip223Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="book_author">
+          <Key>
+            <PropertyRef Name="id_book_author" />
+          </Key>
+          <Property Name="id_book_author" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_author" Type="Int32" Nullable="false" />
+          <Property Name="id_book" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="books" Relationship="Self.FK_book_author_books" FromRole="book_author" ToRole="books" />
+          <NavigationProperty Name="The_authors" Relationship="Self.FK_book_author_The_authors" FromRole="book_author" ToRole="The_authors" />
+        </EntityType>
+        <EntityType Name="books">
+          <Key>
+            <PropertyRef Name="id_book" />
+          </Key>
+          <Property Name="id_book" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="publishing_house" Type="Int32" Nullable="false" />
+          <Property Name="the_year_of_publishing" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="storage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="section" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="book_author" Relationship="Self.FK_book_author_books" FromRole="books" ToRole="book_author" />
+          <NavigationProperty Name="publishing_house1" Relationship="Self.FK_books_publishing_house" FromRole="books" ToRole="publishing_house" />
+          <NavigationProperty Name="sections" Relationship="Self.FK_books_sections" FromRole="books" ToRole="sections" />
+          <NavigationProperty Name="extradition" Relationship="Self.FK_extradition_books" FromRole="books" ToRole="extradition" />
+        </EntityType>
+        <EntityType Name="extradition">
+          <Key>
+            <PropertyRef Name="issue__namber" />
+          </Key>
+          <Property Name="issue__namber" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date_of_issue" Type="Int32" Nullable="false" />
+          <Property Name="return_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="change" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="term" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="library_card_number" Type="Int32" Nullable="false" />
+          <Property Name="id_book" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="books" Relationship="Self.FK_extradition_books" FromRole="extradition" ToRole="books" />
+          <NavigationProperty Name="readers" Relationship="Self.FK_extradition_readers" FromRole="extradition" ToRole="readers" />
+        </EntityType>
+        <EntityType Name="publishing_house">
+          <Key>
+            <PropertyRef Name="publishing_house1" />
+          </Key>
+          <Property Name="publishing_house1" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="books" Relationship="Self.FK_books_publishing_house" FromRole="publishing_house" ToRole="books" />
+        </EntityType>
+        <EntityType Name="readers">
+          <Key>
+            <PropertyRef Name="library_card_number" />
+          </Key>
+          <Property Name="library_card_number" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="the_address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="telephone" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="extradition" Relationship="Self.FK_extradition_readers" FromRole="readers" ToRole="extradition" />
+        </EntityType>
+        <EntityType Name="sections">
+          <Key>
+            <PropertyRef Name="section" />
+          </Key>
+          <Property Name="section" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="books" Relationship="Self.FK_books_sections" FromRole="sections" ToRole="books" />
+        </EntityType>
+        <EntityType Name="The_authors">
+          <Key>
+            <PropertyRef Name="id_author" />
+          </Key>
+          <Property Name="id_author" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="note" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="book_author" Relationship="Self.FK_book_author_The_authors" FromRole="The_authors" ToRole="book_author" />
+        </EntityType>
+        <Association Name="FK_book_author_books">
+          <End Role="books" Type="Self.books" Multiplicity="1" />
+          <End Role="book_author" Type="Self.book_author" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="books">
+              <PropertyRef Name="id_book" />
+            </Principal>
+            <Dependent Role="book_author">
+              <PropertyRef Name="id_book" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_book_author_The_authors">
+          <End Role="The_authors" Type="Self.The_authors" Multiplicity="1" />
+          <End Role="book_author" Type="Self.book_author" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="The_authors">
+              <PropertyRef Name="id_author" />
+            </Principal>
+            <Dependent Role="book_author">
+              <PropertyRef Name="id_author" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_books_publishing_house">
+          <End Role="publishing_house" Type="Self.publishing_house" Multiplicity="1" />
+          <End Role="books" Type="Self.books" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="publishing_house">
+              <PropertyRef Name="publishing_house1" />
+            </Principal>
+            <Dependent Role="books">
+              <PropertyRef Name="publishing_house" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_books_sections">
+          <End Role="sections" Type="Self.sections" Multiplicity="1" />
+          <End Role="books" Type="Self.books" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sections">
+              <PropertyRef Name="section" />
+            </Principal>
+            <Dependent Role="books">
+              <PropertyRef Name="section" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_extradition_books">
+          <End Role="books" Type="Self.books" Multiplicity="1" />
+          <End Role="extradition" Type="Self.extradition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="books">
+              <PropertyRef Name="id_book" />
+            </Principal>
+            <Dependent Role="extradition">
+              <PropertyRef Name="id_book" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_extradition_readers">
+          <End Role="readers" Type="Self.readers" Multiplicity="1" />
+          <End Role="extradition" Type="Self.extradition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="readers">
+              <PropertyRef Name="library_card_number" />
+            </Principal>
+            <Dependent Role="extradition">
+              <PropertyRef Name="library_card_number" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="book_author" EntityType="Self.book_author" />
+          <EntitySet Name="books" EntityType="Self.books" />
+          <EntitySet Name="extradition" EntityType="Self.extradition" />
+          <EntitySet Name="publishing_house" EntityType="Self.publishing_house" />
+          <EntitySet Name="readers" EntityType="Self.readers" />
+          <EntitySet Name="sections" EntityType="Self.sections" />
+          <EntitySet Name="The_authors" EntityType="Self.The_authors" />
+          <AssociationSet Name="FK_book_author_books" Association="Self.FK_book_author_books">
+            <End Role="books" EntitySet="books" />
+            <End Role="book_author" EntitySet="book_author" />
+          </AssociationSet>
+          <AssociationSet Name="FK_book_author_The_authors" Association="Self.FK_book_author_The_authors">
+            <End Role="The_authors" EntitySet="The_authors" />
+            <End Role="book_author" EntitySet="book_author" />
+          </AssociationSet>
+          <AssociationSet Name="FK_books_publishing_house" Association="Self.FK_books_publishing_house">
+            <End Role="publishing_house" EntitySet="publishing_house" />
+            <End Role="books" EntitySet="books" />
+          </AssociationSet>
+          <AssociationSet Name="FK_books_sections" Association="Self.FK_books_sections">
+            <End Role="sections" EntitySet="sections" />
+            <End Role="books" EntitySet="books" />
+          </AssociationSet>
+          <AssociationSet Name="FK_extradition_books" Association="Self.FK_extradition_books">
+            <End Role="books" EntitySet="books" />
+            <End Role="extradition" EntitySet="extradition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_extradition_readers" Association="Self.FK_extradition_readers">
+            <End Role="readers" EntitySet="readers" />
+            <End Role="extradition" EntitySet="extradition" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ip223ModelContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="book_author">
+            <EntityTypeMapping TypeName="ip223Model.book_author">
+              <MappingFragment StoreEntitySet="book author">
+                <ScalarProperty Name="id_book_author" ColumnName="id book author" />
+                <ScalarProperty Name="id_author" ColumnName="id author" />
+                <ScalarProperty Name="id_book" ColumnName="id book" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="books">
+            <EntityTypeMapping TypeName="ip223Model.books">
+              <MappingFragment StoreEntitySet="books">
+                <ScalarProperty Name="id_book" ColumnName="id book" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="publishing_house" ColumnName="publishing house" />
+                <ScalarProperty Name="the_year_of_publishing" ColumnName="the year of publishing" />
+                <ScalarProperty Name="storage" ColumnName="storage" />
+                <ScalarProperty Name="section" ColumnName="section" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="extradition">
+            <EntityTypeMapping TypeName="ip223Model.extradition">
+              <MappingFragment StoreEntitySet="extradition">
+                <ScalarProperty Name="issue__namber" ColumnName="issue  namber" />
+                <ScalarProperty Name="date_of_issue" ColumnName="date of issue" />
+                <ScalarProperty Name="return_date" ColumnName="return date" />
+                <ScalarProperty Name="change" ColumnName="change" />
+                <ScalarProperty Name="term" ColumnName="term" />
+                <ScalarProperty Name="library_card_number" ColumnName="library card number" />
+                <ScalarProperty Name="id_book" ColumnName="id book" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="publishing_house">
+            <EntityTypeMapping TypeName="ip223Model.publishing_house">
+              <MappingFragment StoreEntitySet="publishing house">
+                <ScalarProperty Name="publishing_house1" ColumnName="publishing house" />
+                <ScalarProperty Name="city" ColumnName="city" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="readers">
+            <EntityTypeMapping TypeName="ip223Model.readers">
+              <MappingFragment StoreEntitySet="readers">
+                <ScalarProperty Name="library_card_number" ColumnName="library card number" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="patronymic" ColumnName="patronymic" />
+                <ScalarProperty Name="the_address" ColumnName="the address" />
+                <ScalarProperty Name="telephone" ColumnName="telephone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sections">
+            <EntityTypeMapping TypeName="ip223Model.sections">
+              <MappingFragment StoreEntitySet="sections">
+                <ScalarProperty Name="section" ColumnName="section" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="The_authors">
+            <EntityTypeMapping TypeName="ip223Model.The_authors">
+              <MappingFragment StoreEntitySet="The authors">
+                <ScalarProperty Name="id_author" ColumnName="id author" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="note" ColumnName="note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
